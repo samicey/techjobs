@@ -28,7 +28,7 @@ Router.get("/all",(req, res)=>{
 Router.get("/one",...TODO.GetTodo, validateRequest, (req, res)=>{
   Task.findById(res.locals.data.id).then((doc)=>{
     if(!doc){
-      return res.status(400).send({message:"Todo  not found"})
+      return res.status(404).send({message:"Todo  not found"})
     }
     return res.status(200).send(doc)
   }).catch((error)=>{

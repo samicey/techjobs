@@ -23,6 +23,7 @@ describe('Todo CRUD API',()=>{
     if(!Todo){
       return;
     }
+
     const response = await request(app).get(`/todo/one?id=${Todo.id}`);
     expect(response.status).toBe(200);
     expect(typeof response.body).toBe('object');
@@ -54,9 +55,47 @@ describe('Todo CRUD API',()=>{
     expect(todo.name).toStrictEqual(response.body.name);
     expect(todo.name).toStrictEqual(data.name);
     await todo.remove()
-    // Write test for update and deleting todo
-    //  check Update complete to done
-
-  
+    
   })
+  // Write test for update and deleting todo
+  
+  test('Update a Todo', async ()=>{
+
+    const data = {
+      name: `Eat Akpu and egusi`,
+      done:true
+    };
+
+    const Todo = await Task.findOne();
+    if(!Todo){
+      return;
+    }
+    const response = await request(app).patch(`/todo/update/${Todo.id}`).send(data);
+    expect(response.status).toBe(200);
+    expect(typeof response.body).toBe('object');
+    const UpdateTodo = await Task.findOne({name: data.name});
+    expect(UpdateTodo.name).toStrictEqual(data.name);
+    expect(UpdateTodo.done).toStrictEqual(data.done);  
+    expect(String(Todo._id)).toStrictEqual(UpdateTodo.id); 
+    
+  })
+ //  check delete complete to done
+ test('Delete a Todo', async ()=>{
+
+
+  const Todo = new Task({
+    name: "Eat well to live well",
+    done: true
+  }) 
+
+  Todo.save()
+  console.log(Todo)
+  const response = await request(app).delete(`/todo/delete/${Todo.id}`);
+  expect(response.status).toBe(200);
+  expect(String(response.body.id)).toStrictEqual(Todo.id)
+  const DeleteTodo = await Task.findOne({name: Todo.name}); 
+  expect(DeleteTodo).toStrictEqual(null);
+  
+  
+})
 })

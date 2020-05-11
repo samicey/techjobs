@@ -210,6 +210,7 @@ $(`#ed${id}`).on("keyup", async ( event) => {
     done
   })
   .then((response)=>{
+    console.log(response)
     Swal.fire({
       position: 'top-end',
       icon: 'success',

@@ -37,8 +37,6 @@ fetchTodos().then((response)=>{
   console.log(response)
   if(response.length){
     loadList(response)
-  
-
 }
 })
 

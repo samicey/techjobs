@@ -10,7 +10,9 @@ Router.post(
   "/create", ...TODO.Create, validateRequest,
   (req, res) => {
     const task = new Task(res.locals.data);
+    console.log(task)
     task.save().then((doc) => {
+      console.log(doc)
       return res.send(doc);
     }).catch((err)=>{
       console.log(err)
@@ -20,6 +22,7 @@ Router.post(
 
 Router.get("/all",(req, res)=>{
   Task.find().then((doc)=>{
+    console.log(doc)
     return res.status(200).send(doc)
   }).catch((err)=>{
     console.log(err)

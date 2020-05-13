@@ -34,7 +34,6 @@ async function fetchTodos(){
 
 
 fetchTodos().then((response)=>{
-  console.log(response)
   if(response.length){
     loadList(response)
 }
@@ -211,7 +210,6 @@ $(`#ed${id}`).on("keyup", async ( event) => {
     done
   })
   .then((response)=>{
-    console.log(response)
     Swal.fire({
       position: 'top-end',
       icon: 'success',

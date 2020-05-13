@@ -10,22 +10,17 @@ Router.post(
   "/create", ...TODO.Create, validateRequest,
   (req, res) => {
     const task = new Task(res.locals.data);
-    console.log(task)
     task.save().then((doc) => {
-      console.log(doc)
       return res.send(doc);
     }).catch((err)=>{
-      console.log(err)
       return res.status(503).send({message:"Service unavailable. Try Later", err})
     });
   });
 
 Router.get("/all",(req, res)=>{
   Task.find().then((doc)=>{
-    console.log(doc)
     return res.status(200).send(doc)
   }).catch((err)=>{
-    console.log(err)
       return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
@@ -37,7 +32,6 @@ Router.get("/one",...TODO.GetTodo, validateRequest, (req, res)=>{
     }
     return res.status(200).send(doc)
   }).catch((err)=>{
-    console.log(err)
     return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
@@ -52,7 +46,6 @@ Router.patch("/update/:id",...TODO.UpdateTodo, validateRequest, (req, res)=>{
       }
       return res.status(200).send(doc)
     }).catch((err)=>{
-      console.log(err)
       return res.status(503).send({message:"Service unavailable. Try Later", err})
     })
 })
@@ -64,7 +57,6 @@ Router.delete("/delete/:id",...TODO.DeleteTodo, validateRequest, (req, res)=>{
     }
     return res.status(200).send(doc)
   }).catch((err)=>{
-    console.log(err)
       return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
@@ -76,7 +68,6 @@ Router.delete("/delete", (req, res)=>{
     }
     return res.status(200).send(doc)
   }).catch((err)=>{
-    console.log(err)
     return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })

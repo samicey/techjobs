@@ -13,15 +13,17 @@ Router.post(
     task.save().then((doc) => {
       return res.send(doc);
     }).catch((err)=>{
-      return res.status(503).send({message:"Service unavailable. Try Later"})
+      console.log(err)
+      return res.status(503).send({message:"Service unavailable. Try Later", err})
     });
   });
 
 Router.get("/all",(req, res)=>{
   Task.find().then((doc)=>{
     return res.status(200).send(doc)
-  }).catch((error)=>{
-    return res.status(503).send({message:"Service unavailable. Try Later"})
+  }).catch((err)=>{
+    console.log(err)
+      return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
 
@@ -31,8 +33,9 @@ Router.get("/one",...TODO.GetTodo, validateRequest, (req, res)=>{
       return res.status(404).send({message:"Todo  not found"})
     }
     return res.status(200).send(doc)
-  }).catch((error)=>{
-    return res.status(503).send({message:"Service unavailable. Try Later"})
+  }).catch((err)=>{
+    console.log(err)
+    return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
 
@@ -45,8 +48,9 @@ Router.patch("/update/:id",...TODO.UpdateTodo, validateRequest, (req, res)=>{
         return res.status(400).send({message:"Todo  not found"})
       }
       return res.status(200).send(doc)
-    }).catch((error)=>{
-      return res.status(503).send({message:"Service unavailable. Try Later"})
+    }).catch((err)=>{
+      console.log(err)
+      return res.status(503).send({message:"Service unavailable. Try Later", err})
     })
 })
 
@@ -56,8 +60,9 @@ Router.delete("/delete/:id",...TODO.DeleteTodo, validateRequest, (req, res)=>{
       return res.status(400).send({message:"Todo  not found"})
     }
     return res.status(200).send(doc)
-  }).catch((error)=>{
-    return res.status(503).send({message:"Service unavailable. Try Later"})
+  }).catch((err)=>{
+    console.log(err)
+      return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
 
@@ -67,8 +72,9 @@ Router.delete("/delete", (req, res)=>{
       return res.status(400).send({message:"Todo  not found"})
     }
     return res.status(200).send(doc)
-  }).catch((error)=>{
-    return res.status(503).send({message:"Service unavailable. Try Later"})
+  }).catch((err)=>{
+    console.log(err)
+    return res.status(503).send({message:"Service unavailable. Try Later", err})
   })
 })
 

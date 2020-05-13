@@ -34,10 +34,9 @@ async function fetchTodos(){
 
 
 fetchTodos().then((response)=>{
-  if(response){
   if(response.length){
     loadList(response)
-  }
+  
 
 }
 })

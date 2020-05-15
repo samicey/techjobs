@@ -88,11 +88,10 @@ describe('Todo CRUD API',()=>{
     done: true
   }) 
 
-  Todo.save()
-  console.log(Todo)
+  await Todo.save()
   const response = await request(app).delete(`/todo/delete/${Todo.id}`);
   expect(response.status).toBe(200);
-  expect(String(response.body.id)).toStrictEqual(Todo.id)
+  expect(response.body._id).toStrictEqual(Todo.id)
   const DeleteTodo = await Task.findOne({name: Todo.name}); 
   expect(DeleteTodo).toStrictEqual(null);
   
